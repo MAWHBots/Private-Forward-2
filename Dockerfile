@@ -1,12 +1,14 @@
-FROM python:3.8-slim-buster
 
-RUN apt update && apt upgrade -y
-RUN apt install git -y
-COPY requirements.txt /requirements.txt
+FROM python:3.9-slim
 
-RUN cd /
-RUN pip3 install -U pip && pip3 install -U -r requirements.txt
-RUN JishuDeveloper /Ultra-Forward-Bot
+COPY . /Ultra-Forward-Bot
 WORKDIR /Ultra-Forward-Bot
+
+RUN pip3 install -U pip && pip3 install -U -r requirements.txt
+
+# Replace this line with the actual command or script you want to run
+RUN python3 main.py
+
 COPY start.sh /start.sh
-CMD ["/bin/bash", "/start.sh"]
+RUN chmod +x /start.sh
+CMD ["sh", "/start.sh"]
